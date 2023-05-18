@@ -1,0 +1,36 @@
+void setup() {
+pinMode(A0, INPUT); //sensor
+pinMode(10, OUTPUT);   //blue
+pinMode(9, OUTPUT); //green
+pinMode(11, OUTPUT); //red
+Serial.begin(9600);
+}
+void   loop() {
+int sensor = analogRead(A0);
+sensor=map(sensor,20,358,-40,125);
+//float voltage = (sensor / 1024.0) *   5.0;
+//float tempC = (voltage - .5) * 100;
+//float tempF = (tempC * 1.8) + 32;
+Serial.print("temp:   ");
+ 
+Serial.print(sensor);
+if (sensor>-40 and sensor<=35) { 
+digitalWrite(10, HIGH);
+digitalWrite(9,   LOW);
+digitalWrite(11, LOW);
+Serial.println("");
+}
+else   if (sensor>100) {
+digitalWrite(10, LOW);
+digitalWrite(9, LOW);
+digitalWrite(11,   HIGH);
+Serial.println("");
+}
+else {
+digitalWrite(10,   LOW);
+digitalWrite(9, HIGH);
+digitalWrite(11, LOW);
+Serial.println("");
+}
+delay(1000);
+}
